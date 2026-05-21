@@ -11,6 +11,7 @@ jobs:
   test:
     timeout-minutes: 30
     runs-on: ubuntu-latest
+    environment: dev
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,11 +30,9 @@ jobs:
 
       - name: Create .env file
         run: |
-          cat <<EOF > .env
-          APP_URL=${{ secrets.APP_URL }}
-          APP_USERNAME=${{ secrets.APP_USERNAME }}
-          APP_PASSWORD=${{ secrets.APP_PASSWORD }}
-          EOF
+          echo "APP_URL=${{ secrets.APP_URL }}" >> .env
+          echo "APP_USERNAME=${{ secrets.APP_USERNAME }}" >> .env
+          echo "APP_PASSWORD=${{ secrets.APP_PASSWORD }}" >> .env
 
       - name: Run Playwright tests
         run: npx playwright test
