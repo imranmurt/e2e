@@ -28,7 +28,7 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. */
     trace: 'on-first-retry',
     screenshot: 'on',
-    headless: false,
+    headless: !!process.env.CI,
   },
 
   /* Configure projects for major browsers */
